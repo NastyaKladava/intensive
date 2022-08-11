@@ -1,0 +1,18 @@
+.textarea {
+    font-size: 10px;
+    padding: 5px;
+    margin-bottom: 7px;
+    resize: none;
+    outline:  none;
+    border: none;
+    border-radius: 10px;
+    min-width: 165px;
+    color: #000;
+    background-color: rgba(239, 245, 241, 0.5);
+
+}
+
+.textarea::placeholder {
+    font-size: 10px;
+    color: rgb(46, 44, 44);
+}

@@ -1,0 +1,28 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 50vh;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.formInputs {
+    margin-bottom: 10px;
+}
+
+.formTextareas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px
+}
+
+.formBtns { 
+    display: flex;
+    justify-content: space-between;
+    min-width: 215px;
+}
