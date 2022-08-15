@@ -1,0 +1,23 @@
+.questionary {    
+    padding: 20px;
+    min-width: 50vh;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.questionaryHeader {
+    text-align: center;
+}
+
+.questionaryText {
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: rgb(46, 44, 44);
+    background-color: rgba(87, 230, 129, 0.2);
+}
+
+.questionaryText span {
+    font-weight: 700;
+}
