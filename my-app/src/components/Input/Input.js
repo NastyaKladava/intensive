@@ -2,8 +2,6 @@ import React from "react";
 import styles from "./Input.module.css";
 
 export function formatPhoneNumber(value) {
-  if (!value) return value;
-
   const phoneNumber = value.replace(/[^\d]/g, "");
   const phoneNumberLength = phoneNumber.length;
 
@@ -17,27 +15,75 @@ export function formatPhoneNumber(value) {
   )}-${phoneNumber.slice(5, 10)}`;
 }
 
+const inputData = [
+  {
+    htmlFor: "name",
+    labelText: "Имя",
+    id: "name",
+    type: "text",
+    name: "name",
+    placeholder: "Иван",
+    maxLength: null,
+  },
+  {
+    htmlFor: "surname",
+    labelText: "Фамилия",
+    id: "surname",
+    type: "text",
+    name: "surname",
+    placeholder: "Иванов",
+    maxLength: null,
+  },
+  {
+    htmlFor: "birthDate",
+    labelText: "Дата рождения",
+    id: "birthDate",
+    type: "date",
+    name: "birthDate",
+    maxLength: null,
+  },
+  {
+    htmlFor: "tel",
+    labelText: "Телефон",
+    id: "tel",
+    type: "tel",
+    name: "tel",
+    placeholder: "7-7777-77-77",
+    maxLength: "13",
+  },
+  {
+    htmlFor: "site",
+    labelText: "Сайт",
+    id: "site",
+    type: "text",
+    name: "site",
+    placeholder: "www.ivanov.by",
+  },
+];
+
 class Input extends React.Component {
   render() {
-    return (
-      <div className={styles.inputBox}>
-        <label className={styles.inputLabel} htmlFor={this.props.htmlFor}>
-          {this.props.labelText}
+    const { fields, errors } = this.props.state;
+
+    return inputData.map((el) => (
+      <div className={styles.inputBox} key={el.id}>
+        <label className={styles.inputLabel} htmlFor={el.name}>
+          {el.labelText}
         </label>
         <input
-          id={this.props.id}
+          id={el.id}
           className={styles.inputValue}
-          type={this.props.type}
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-          maxLength={this.props.maxLength}
-          value={this.props.value}
+          type={el.type}
+          name={el.name}
+          placeholder={el.placeholder}
+          maxLength={el.maxLength}
+          // notice={errors[el.name]}
+          value={fields[el.name]}
           onChange={this.props.handleInputChanges}
         />
-
-        <span className={styles.inputNotice}>{this.props.notice}</span>
+        <span className={styles.inputNotice}>{errors[el.name]}</span>
       </div>
-    );
+    ));
   }
 }
 

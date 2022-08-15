@@ -6,8 +6,6 @@ import Questionary from "../Questionary/Questionary";
 import { formatPhoneNumber } from "../Input/Input";
 import styles from "./Form.module.css";
 
-export const userData = {};
-
 class Form extends React.Component {
   state = {
     fields: {
@@ -71,7 +69,7 @@ class Form extends React.Component {
       case "tel":
         if (!value.trim()) {
           return "Поле пустое. Заполните, пожалуйста.";
-        } else if (value.trim().length >= 12) {
+        } else if (value.trim().length > 12) {
           return "Номер телефона должен содержать 12 символов.";
         } else {
           return "";
@@ -100,26 +98,15 @@ class Form extends React.Component {
   };
 
   handleInputChanges = (e) => {
-    const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+    let formattedPhoneNumber;
+    if (e.target.name === "tel")
+      formattedPhoneNumber = formatPhoneNumber(e.target.value);
 
     this.setState({
       fields: {
         ...this.state.fields,
         [e.target.name]: e.target.value,
-        tel: formattedPhoneNumber || e.target.value,
-      },
-      errors: {
-        ...this.state.errors,
-        [e.target.name]: this.validate(e.target.name, e.target.value),
-      },
-    });
-  };
-
-  handleTextareaChanges = (e) => {
-    this.setState({
-      fields: {
-        ...this.state.fields,
-        [e.target.name]: e.target.value,
+        tel: formattedPhoneNumber || this.state.fields.tel,
       },
       errors: {
         ...this.state.errors,
@@ -147,12 +134,8 @@ class Form extends React.Component {
       this.setState({ errors: validationErrors });
     }
 
-    if (Object.keys(validationErrors).length === 0) {
+    if (Object.keys(validationErrors).length === 0)
       this.setState({ submitted: true });
-      for (let el in fields) {
-        userData[el] = fields[el];
-      }
-    }
   };
 
   resetForm = () => {
@@ -160,111 +143,31 @@ class Form extends React.Component {
   };
 
   renderUserInfo() {
-    return <Questionary name={userData.name} />;
+    return <Questionary state={this.state} />;
   }
 
   render() {
-    const { fields, errors, texareaCounters } = this.state;
+    const { submitted } = this.state;
 
-    return this.state.submitted ? (
+    return submitted ? (
       this.renderUserInfo()
     ) : (
       <form className={styles.form} onSubmit={this.handleSubmit}>
         <div className={styles.formfields}>
           <Input
-            htmlFor='name'
-            labelText='Имя'
-            id='name'
-            type='text'
-            name='name'
-            placeholder='Иван'
-            notice={errors.name}
-            value={fields.name}
-            handleInputChanges={this.handleInputChanges}
-          />
-          <Input
-            htmlFor='surname'
-            labelText='Фамилия'
-            id='surname'
-            type='text'
-            name='surname'
-            placeholder='Иванов'
-            notice={errors.surname}
-            value={fields.surname}
-            handleInputChanges={this.handleInputChanges}
-          />
-
-          <Input
-            htmlFor='birthDate'
-            labelText='Дата рождения'
-            id='birthDate'
-            type='date'
-            name='birthDate'
-            notice={errors.birthDate}
-            value={fields.birthDate}
-            handleInputChanges={this.handleInputChanges}
-          />
-          <Input
-            htmlFor='tel'
-            labelText='Телефон'
-            id='tel'
-            type='tel'
-            name='tel'
-            placeholder='7-7777-77-77'
-            maxLength='12'
-            notice={errors.tel}
-            value={fields.tel}
-            handleInputChanges={this.handleInputChanges}
-          />
-
-          <Input
-            htmlFor='site'
-            labelText='Сайт'
-            id='site'
-            type='text'
-            name='site'
-            placeholder='www.ivanov.by'
-            notice={errors.site}
-            value={fields.site}
+            state={this.state}
             handleInputChanges={this.handleInputChanges}
           />
         </div>
         <div className={styles.formTextareas}>
           <Textarea
-            rows='7'
-            maxLength='600'
-            name='about'
-            placeholder='О себе...'
-            notice={errors.about}
-            counter={texareaCounters.about}
-            value={fields.about}
-            handleInputChanges={this.handleTextareaChanges}
-          />
-          <Textarea
-            rows='7'
-            maxLength='600'
-            name='technologies'
-            placeholder='Стек технологий...'
-            notice={errors.technologies}
-            counter={texareaCounters.technologies}
-            value={fields.technologies}
-            handleInputChanges={this.handleTextareaChanges}
-          />
-          <Textarea
-            rows='7'
-            maxLength='600'
-            name='lastProject'
-            placeholder='Описание последнего проекта...'
-            notice={errors.lastProject}
-            counter={texareaCounters.lastProject}
-            value={fields.lastProject}
-            handleInputChanges={this.handleTextareaChanges}
+            state={this.state}
+            handleInputChanges={this.handleInputChanges}
           />
         </div>
-
         <div className={styles.formBtns}>
-          <Button type='button' text='Отмена' handler={this.resetForm} />
-          <Button type='submit' text='Сохранить' />
+          <Button type="button" text="Отмена" handler={this.resetForm} />
+          <Button type="submit" text="Сохранить" />
         </div>
       </form>
     );

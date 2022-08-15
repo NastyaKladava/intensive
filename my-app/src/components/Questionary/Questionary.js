@@ -1,37 +1,38 @@
 import React from "react";
-import { userData } from "../Form/Form";
 import styles from "./Questionary.module.css";
 
 class Questionary extends React.Component {
   render() {
+    const { fields } = this.props.state;
+
     return (
       <div className={styles.questionary}>
         <h2 className={styles.questionaryHeader}>
-          {userData.name} {userData.surname}
+          {fields.name} {fields.surname}
         </h2>
         <p className={styles.questionaryText}>
           <span>Дата рождения: </span>
-          {userData.birthDate}
+          {fields.birthDate}
         </p>
         <p className={styles.questionaryText}>
           <span>Номер телефона: </span>
-          {userData.tel}
+          {fields.tel}
         </p>
         <p className={styles.questionaryText}>
           <span>Сайт: </span>
-          {userData.site}
+          {fields.site}
         </p>
         <p className={styles.questionaryText}>
           <span>О себе: </span>
-          {userData.about}
+          {fields.about}
         </p>
         <p className={styles.questionaryText}>
           <span>Стек технологий: </span>
-          {userData.technologies}
+          {fields.technologies}
         </p>
         <p className={styles.questionaryText}>
           <span>Описание последнего проекта: </span>
-          {userData.lastProject}
+          {fields.lastProject}
         </p>
       </div>
     );
