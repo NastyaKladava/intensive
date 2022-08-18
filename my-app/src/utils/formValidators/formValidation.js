@@ -29,7 +29,7 @@ export function validate(name, value) {
     case "tel":
       if (!value.trim()) {
         return "Поле пустое. Заполните, пожалуйста.";
-      } else if (value.trim().length > 12) {
+      } else if (value.trim().length > 13) {
         return "Номер телефона должен содержать 12 символов.";
       } else {
         return "";

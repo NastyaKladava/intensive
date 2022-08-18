@@ -15,28 +15,36 @@ export function formatPhoneNumber(value) {
   )}-${phoneNumber.slice(5, 10)}`;
 }
 
-class Input extends React.Component {
-  render() {
-    return (
-      <div className={styles.inputBox} key={this.key}>
-        <label className={styles.inputLabel} htmlFor={this.props.name}>
-          {this.props.labelText}
-        </label>
-        <input
-          id={this.props.id}
-          className={styles.inputValue}
-          type={this.props.type}
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-          maxLength={this.props.maxLength}
-          notice={this.props.notice}
-          value={this.props.value}
-          onChange={this.props.handleInputChanges}
-        />
-        <span className={styles.inputNotice}>{this.props.notice}</span>
-      </div>
-    );
-  }
-}
+const Input = ({
+  name,
+  labelText,
+  id,
+  type,
+  placeholder,
+  maxLength,
+  notice,
+  value,
+  handleInputChanges,
+}) => {
+  return (
+    <div className={styles.inputBox}>
+      <label className={styles.inputLabel} htmlFor={name}>
+        {labelText}
+      </label>
+      <input
+        id={id}
+        className={styles.inputValue}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        notice={notice}
+        value={value}
+        onChange={handleInputChanges}
+      />
+      <span className={styles.inputNotice}>{notice}</span>
+    </div>
+  );
+};
 
 export default Input;

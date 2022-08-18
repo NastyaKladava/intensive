@@ -1,4 +1,4 @@
-export const formFields = {
+const formFields = {
   fields: {
     name: "",
     surname: "",
@@ -19,10 +19,9 @@ export const formFields = {
     technologies: "",
     lastProject: "",
   },
-  submitted: false,
 };
 
-export const inputsData = [
+const inputsData = [
   {
     labelText: "Имя",
     id: "name",
@@ -64,7 +63,7 @@ export const inputsData = [
   },
 ];
 
-export const textareasData = [
+const textareasData = [
   { rows: "7", maxLength: "600", name: "about", placeholder: "О себе..." },
   {
     rows: "7",
@@ -79,3 +78,5 @@ export const textareasData = [
     placeholder: "Описание последнего проекта...",
   },
 ];
+
+export { formFields, inputsData, textareasData };
