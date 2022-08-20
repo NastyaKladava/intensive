@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "../Input/Input";
 import Textarea from "../Textarea/Textarea";
 import Button from "../Button/Button";
-import Questionary from "../Questionary/Questionary";
-import Notification from "../Notification/Notification";
 import {
   formFields,
   inputsData,
@@ -13,17 +11,17 @@ import { validate } from "../../utils/formValidators/formValidation";
 import { formatPhoneNumber } from "../Input/Input";
 import styles from "./Form.module.css";
 
-const Form = () => {
-  const [fieldValue, setFieldValue] = useState(formFields);
-  const [isSubmitted, setSubmitted] = useState(false);
-  const [isShowPopUp, setIsShowPopUp] = useState(true);
-
+const Form = ({
+  handlefieldValueChange,
+  fieldValue,
+  handleisSubmittedChange,
+}) => {
   const handleInputChanges = (e) => {
     let formattedPhoneNumber;
     if (e.target.name === "tel")
       formattedPhoneNumber = formatPhoneNumber(e.target.value);
 
-    setFieldValue((prevState) => ({
+    handlefieldValueChange((prevState) => ({
       fields: {
         ...prevState.fields,
         [e.target.name]: e.target.value,
@@ -32,6 +30,7 @@ const Form = () => {
       errors: {
         ...prevState.errors,
         [e.target.name]: validate(e.target.name, e.target.value),
+        tel: validate("tel", formattedPhoneNumber || prevState.fields.tel),
       },
     }));
   };
@@ -48,30 +47,23 @@ const Form = () => {
     });
 
     if (Object.keys(validationErrors).length > 0) {
-      setFieldValue((prevState) => ({
+      handlefieldValueChange((prevState) => ({
         ...prevState,
         errors: validationErrors,
       }));
     }
 
     if (Object.keys(validationErrors).length === 0) {
-      setSubmitted(true);
-      setIsShowPopUp(true);
+      handleisSubmittedChange(true);
     }
   };
   const resetForm = () => {
-    setFieldValue(formFields);
+    handlefieldValueChange(formFields);
   };
 
   const { fields, errors } = fieldValue;
 
-  return isSubmitted ? (
-    <>
-      {" "}
-      <Questionary state={fieldValue} />
-      <Notification isShowPopUp={isShowPopUp} setIsShowPopUp={setIsShowPopUp} />
-    </>
-  ) : (
+  return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formfields}>
         {inputsData.map((el) => (

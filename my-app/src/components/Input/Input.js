@@ -12,7 +12,7 @@ export function formatPhoneNumber(value) {
   return `${phoneNumber.slice(0, 1)}-${phoneNumber.slice(
     1,
     5
-  )}-${phoneNumber.slice(5, 10)}`;
+  )}-${phoneNumber.slice(5)}`;
 }
 
 const Input = ({
@@ -21,7 +21,6 @@ const Input = ({
   id,
   type,
   placeholder,
-  maxLength,
   notice,
   value,
   handleInputChanges,
@@ -37,7 +36,6 @@ const Input = ({
         type={type}
         name={name}
         placeholder={placeholder}
-        maxLength={maxLength}
         notice={notice}
         value={value}
         onChange={handleInputChanges}

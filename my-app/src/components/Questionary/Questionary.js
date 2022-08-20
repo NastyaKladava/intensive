@@ -2,35 +2,46 @@ import React from "react";
 import styles from "./Questionary.module.css";
 
 const Questionary = (props) => {
-  const { fields } = props.state;
+  const {
+    fields: {
+      name,
+      surname,
+      birthDate,
+      tel,
+      site,
+      about,
+      technologies,
+      lastProject,
+    },
+  } = props.state;
   return (
     <div className={styles.questionary}>
       <h2 className={styles.questionaryHeader}>
-        {fields.name} {fields.surname}
+        {name} {surname}
       </h2>
       <p className={styles.questionaryText}>
         <span>Дата рождения: </span>
-        {fields.birthDate}
+        {birthDate}
       </p>
       <p className={styles.questionaryText}>
         <span>Номер телефона: </span>
-        {fields.tel}
+        {tel}
       </p>
       <p className={styles.questionaryText}>
         <span>Сайт: </span>
-        {fields.site}
+        {site}
       </p>
       <p className={styles.questionaryText}>
         <span>О себе: </span>
-        {fields.about}
+        {about}
       </p>
       <p className={styles.questionaryText}>
         <span>Стек технологий: </span>
-        {fields.technologies}
+        {technologies}
       </p>
       <p className={styles.questionaryText}>
         <span>Описание последнего проекта: </span>
-        {fields.lastProject}
+        {lastProject}
       </p>
     </div>
   );

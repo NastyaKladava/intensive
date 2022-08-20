@@ -28,7 +28,6 @@ const inputsData = [
     type: "text",
     name: "name",
     placeholder: "Иван",
-    maxLength: null,
   },
   {
     labelText: "Фамилия",
@@ -36,14 +35,12 @@ const inputsData = [
     type: "text",
     name: "surname",
     placeholder: "Иванов",
-    maxLength: null,
   },
   {
     labelText: "Дата рождения",
     id: "birthDate",
     type: "date",
     name: "birthDate",
-    maxLength: null,
   },
   {
     labelText: "Телефон",
@@ -51,7 +48,6 @@ const inputsData = [
     type: "tel",
     name: "tel",
     placeholder: "7-7777-77-77",
-    maxLength: null,
   },
   {
     htmlFor: "site",
