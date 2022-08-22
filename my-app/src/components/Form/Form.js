@@ -1,42 +1,47 @@
-import React from "react";
-import Input from "../Input/Input";
-import Textarea from "../Textarea/Textarea";
+import React, { useContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Input from "..//Input/Input";
 import Button from "../Button/Button";
-import Questionary from "../Questionary/Questionary";
-import {
-  formFields,
-  inputsData,
-  textareasData,
-} from "../../constants/constants";
-import { validate } from "../../utils/formValidators/formValidation";
-import { formatPhoneNumber } from "../Input/Input";
+import { LoginContext } from "../../hoc/LoginProvider";
+import { formAuthFields } from "../../constants/constants";
+import { validate } from "../../utils/modalFormValidation";
 import styles from "./Form.module.css";
 
-class Form extends React.Component {
-  state = formFields;
+const Form = () => {
+  const [inputsValue, setInputsValue] = useState(formAuthFields);
+  const { isLoggedIn, setisLogin, isSubmitted, setIsSubmitted } =
+    useContext(LoginContext);
 
-  handleInputChanges = (e) => {
-    let formattedPhoneNumber;
-    if (e.target.name === "tel")
-      formattedPhoneNumber = formatPhoneNumber(e.target.value);
+  const navigate = useNavigate();
+  const goBack = () => navigate("/");
+  const location = useLocation();
 
-    this.setState({
-      fields: {
-        ...this.state.fields,
-        [e.target.name]: e.target.value,
-        tel: formattedPhoneNumber || this.state.fields.tel,
-      },
-      errors: {
-        ...this.state.errors,
-        [e.target.name]: validate(e.target.name, e.target.value),
-      },
-    });
+  const handleLogin = () => {
+    setisLogin(true);
+
+    location.state?.from?.pathName
+      ? navigate(location.state?.from?.pathName, { replace: true })
+      : navigate("/");
+    console.log("yyyyy");
   };
 
-  handleSubmit = (e) => {
+  const handleInputChanges = (e) => {
+    setInputsValue((prevState) => ({
+      fields: {
+        ...prevState.fields,
+        [e.target.name]: e.target.value,
+      },
+      errors: {
+        ...prevState.errors,
+        [e.target.name]: validate(e.target.name, e.target.value),
+      },
+    }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { fields } = this.state;
+    const { fields } = inputsValue;
     let validationErrors = {};
 
     Object.keys(fields).forEach((el) => {
@@ -45,63 +50,58 @@ class Form extends React.Component {
     });
 
     if (Object.keys(validationErrors).length > 0) {
-      this.setState({ errors: validationErrors });
+      setInputsValue((prevState) => ({
+        ...prevState,
+        errors: validationErrors,
+      }));
     }
 
-    if (Object.keys(validationErrors).length === 0)
-      this.setState({ submitted: true });
+    if (Object.keys(validationErrors).length === 0) {
+      setIsSubmitted(true);
+      handleLogin();
+    }
   };
 
-  resetForm = () => {
-    this.setState(formFields);
+  const resetForm = () => {
+    setInputsValue(formAuthFields);
   };
 
-  render() {
-    const { fields, errors, submitted } = this.state;
+  const { fields, errors } = inputsValue;
 
-    return submitted ? (
-      <Questionary state={this.state} />
-    ) : (
-      <form className={styles.form} onSubmit={this.handleSubmit}>
-        <div className={styles.formfields}>
-          {inputsData.map((el) => (
-            <Input
-              key={el.id}
-              htmlFor={el.name}
-              labelText={el.labelText}
-              id={el.id}
-              className={styles.inputValue}
-              type={el.type}
-              name={el.name}
-              placeholder={el.placeholder}
-              maxLength={el.maxLength}
-              notice={errors[el.name]}
-              value={fields[el.name]}
-              handleInputChanges={this.handleInputChanges}
-            />
-          ))}
-        </div>
-        <div className={styles.formTextareas}>
-          {textareasData.map((el, index) => (
-            <Textarea
-              key={index}
-              rows={el.rows}
-              maxLength={el.maxLength}
-              name={el.name}
-              placeholder={el.placeholder}
-              notice={errors[el.name]}
-              value={fields[el.name]}
-              handleInputChanges={this.handleInputChanges}
-            />
-          ))}
-        </div>
-        <div className={styles.formBtns}>
-          <Button type='button' text='Отмена' handler={this.resetForm} />
-          <Button type='submit' text='Сохранить' />
-        </div>
-      </form>
-    );
-  }
-}
+  return (
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <div className={styles.formfields}>
+        <Input
+          htmlFor='login'
+          labelText='Login'
+          id='login'
+          type='text'
+          name='login'
+          placeholder='Enter login'
+          notice={errors.login}
+          value={fields.login}
+          handleInputChanges={handleInputChanges}
+        />
+        <Input
+          htmlFor='password'
+          labelText='Password'
+          id='password'
+          type='password'
+          name='password'
+          placeholder='Enter password'
+          notice={errors.password}
+          value={fields.password}
+          handleInputChanges={handleInputChanges}
+        />
+      </div>
+      <div className={styles.formBtns}>
+        <Button type='submit'>{isLoggedIn ? "Выйти" : "Войти"}</Button>
+        <Button type='button' handler={goBack}>
+          Отмена
+        </Button>
+      </div>
+    </form>
+  );
+};
 
 export default Form;
