@@ -1,0 +1,13 @@
+.notFoundContainer {
+  max-width: 1620px;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.notFoundMessage {
+  text-align: center;
+}
+
+.notFoundLink {
+  color: var(--color-accent);
+}

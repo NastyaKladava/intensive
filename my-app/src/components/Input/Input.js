@@ -7,6 +7,7 @@ const Input = ({
   id,
   type,
   placeholder,
+  min,
   notice,
   value,
   handleInputChanges,
@@ -22,6 +23,7 @@ const Input = ({
         type={type}
         name={name}
         placeholder={placeholder}
+        min={min}
         notice={notice}
         value={value}
         onChange={handleInputChanges}

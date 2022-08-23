@@ -1,13 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg-main: rgb(47, 57, 103);
+  --color-bg-secondary: rgb(169, 173, 188);
+  --color-accent: rgb(70, 152, 65);
+  --color-light: rgb(236, 223, 209);
+  --border-radius: 8px;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1620px;
+  padding: 30px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.headerLink {
+  text-decoration: none;
+  outline: none;
+  color: rgb(236, 223, 209);
+}
+
+.headerLink:not(:last-child) {
+  position: relative;
+  margin-right: 10px;
+}
+
+.active {
+  color: rgb(63, 163, 63);
+}
+
+.headerLink.active {
+  border-bottom: 2px solid rgb(63, 163, 63);
 }

@@ -15,25 +15,18 @@ const App = () => {
   return (
     <LoginProvider>
       <Routes location={state?.backgroundLocation || location}>
-        <Route path='/' element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Products />} />
-          <Route path='products/:id' element={<Product />} />
-          <Route
-            path='about'
-            element={
-              <RequireAuth>
-                <About />
-              </RequireAuth>
-            }
-          />
-          <Route path='modal' element={<Modal />} />
-          <Route path='*' element={<NotFound />} />
+          <Route path="products/:id" element={<Product />} />
+          <Route path="about" element={<About />} />
+          <Route path="modal" element={<Modal />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
 
       {state?.backgroundLocation && (
         <Routes>
-          <Route path='modal' element={<Modal />} />
+          <Route path="modal" element={<Modal />} />
         </Routes>
       )}
     </LoginProvider>

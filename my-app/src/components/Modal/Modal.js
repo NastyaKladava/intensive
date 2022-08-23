@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import Form from "../Form/Form";
 import { LoginContext } from "../../hoc/LoginProvider";
+import closeSvg from "../../images/icons/close.svg";
 import styles from "./Modal.module.css";
 
 export const Modal = () => {
@@ -24,11 +25,12 @@ export const Modal = () => {
   return (
     <div className={styles.modalBox}>
       <div className={styles.modal}>
-        <Button type='button' handler={goBack}>
-          Закрыть
-        </Button>
+        <button
+          type="button"
+          onClick={goBack}
+          className={styles.modalBtn}
+        ></button>
         <Form />
-        {/* <Button type='button'>Login</Button> */}
       </div>
     </div>
   );
