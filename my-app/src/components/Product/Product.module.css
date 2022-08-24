@@ -40,7 +40,7 @@
 .productAbout {
   display: flex;
   flex-direction: column;
-  flex: 0 0 60%;
+  flex: 0 0 40%;
 }
 
 .productName {
@@ -55,6 +55,7 @@
 
 .productBuy {
   display: flex;
+  align-items: center;
 }
 
 .productPrice {
@@ -65,13 +66,30 @@
   color: var(--color-accent);
 }
 
-.productCart {
-  display: flex;
-  flex-direction: column;
-}
-
 .productNotice {
   font-size: 8px;
   display: inline-block;
   color: rgb(16, 16, 102);
 }
+
+.producCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.producInput {
+  margin-left: 8px;
+  padding: 5px;
+  width: 35px;
+  border-radius: var(--border-radius);
+  outline: none;
+  border: none;
+  background-color: var(--color-light);
+}
+
+.inputValue::placeholder {
+  font-size: 10px;
+  color: #2e2c2c;
+}
+

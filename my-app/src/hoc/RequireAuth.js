@@ -13,3 +13,5 @@ const RequireAuth = ({ children }) => {
 };
 
 export default RequireAuth;
+
+// !!!Этот компонент не использовала. Просто оставила себе для примера

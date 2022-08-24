@@ -1,3 +1,5 @@
 .productsCart {
- 
+    margin-right: 40px;
+    font-weight: 600;
+    color: var(--color-bg-main);
 }

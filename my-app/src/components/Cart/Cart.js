@@ -7,9 +7,9 @@ const Cart = () => {
 
   return (
     <div className={styles.productsCart}>
-      <p className="productsText">
+      <p className='productsText'>
         В корзине <span>{prodQuantity}</span> товаров на сумму{" "}
-        <span>{prodSum}</span>
+        <span>{prodSum}</span>$.
       </p>
     </div>
   );

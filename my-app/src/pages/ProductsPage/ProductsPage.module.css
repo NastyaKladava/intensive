@@ -45,6 +45,7 @@
 .productBuy {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .productPrice {
@@ -55,10 +56,6 @@
   color: var(--color-accent);
 }
 
-.productCart {
-  display: flex;
-  flex-direction: column;
-}
 
 .productNotice {
   font-size: 8px;

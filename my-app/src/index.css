@@ -32,12 +32,9 @@ a {
   max-width: 1620px;
   padding: 30px;
   margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
+  align-items: center;
 }
 
 .headerLink {

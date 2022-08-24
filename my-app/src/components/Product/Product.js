@@ -10,28 +10,31 @@ const requestUrl = "https://api.escuelajs.co/api/v1/products/";
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
+  const [prodInputQuantity, setProdInputQuantity] = useState(0);
   const { isLoggedIn, setSum, setQuantity } = useContext(LoginContext);
-  const navigate = useNavigate();
 
-  const goBack = () => navigate("/");
+  const navigate = useNavigate();
+  const goBack = () => navigate(-1);
 
   const addToCart = (e) => {
-    let price = Number(e.target.previousSibling.innerText);
-    setQuantity((prevState) => prevState + 1);
-    setSum((prevState) => prevState + price);
+    let price = Number(parseInt(e.target.previousSibling.innerText));
+    if (prodInputQuantity > 0) {
+      setQuantity((prevState) => +prevState + +prodInputQuantity);
+    }
+    setSum((prevState) => prevState + price * prodInputQuantity);
   };
 
   useEffect(() => {
-    getSelectedProduct(requestUrl, id).then((result) => setProduct(result));
+    getSelectedProduct(requestUrl, id, setProduct);
   }, [id]);
 
   return (
     <>
-      <section className="product">
+      <section className='product'>
         <div className={styles.productContainer}>
           <div className={styles.productTop}>
             <Button handler={goBack} className={styles.btn}>
-              GoBack
+              Назад
             </Button>
             <h2 className={styles.productTitle}>
               Здесь представлено подробное описание товара
@@ -45,17 +48,26 @@ const Product = () => {
               <h3 className={styles.productName}>{product.title}</h3>
               <p className={styles.productDescr}>{product.description}</p>
               <div className={styles.productBuy}>
-                <span className={styles.productPrice}>{product.price}</span>
-                <div className={styles.productCart}>
-                  <Button type="button" handler={addToCart}>
-                    Добавить в корзину
-                  </Button>
-                  {!isLoggedIn && (
-                    <span className={styles.productNotice}>
-                      Чтобы добавить товар в корзину залогиньтесь!
-                    </span>
-                  )}
-                </div>
+                <span className={styles.productPrice}>{product.price}$</span>
+                {!isLoggedIn ? (
+                  <span className={styles.productNotice}>
+                    Чтобы добавить товар в корзину залогиньтесь!
+                  </span>
+                ) : (
+                  <>
+                    <Button type='button' handler={addToCart}>
+                      Добавить в корзину
+                    </Button>
+                    <input
+                      className={styles.producInput}
+                      name='prodCount'
+                      id='prodCount'
+                      type='number'
+                      value={prodInputQuantity}
+                      onChange={(e) => setProdInputQuantity(e.target.value)}
+                    />
+                  </>
+                )}
               </div>
             </div>
           </div>
