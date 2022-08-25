@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import { LoginContext } from "../../hoc/LoginProvider";
 import styles from "./Product.module.css";
 
-const requestUrl = "https://api.escuelajs.co/api/v1/products/";
+const requestUrl = "https://fakestoreapi.com/products/";
 
 const Product = () => {
   const { id } = useParams();
@@ -42,7 +42,7 @@ const Product = () => {
           </div>
           <div className={styles.productBox}>
             <div className={styles.productImage}>
-              <img src={product.images} alt={product.title} />
+              <img src={product.image} alt={product.title} />
             </div>
             <div className={styles.productAbout}>
               <h3 className={styles.productName}>{product.title}</h3>

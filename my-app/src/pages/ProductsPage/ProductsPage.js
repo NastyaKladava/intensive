@@ -5,7 +5,7 @@ import { getAllProducts } from "../../requests/getProducts";
 import { LoginContext } from "../../hoc/LoginProvider";
 import styles from "./ProductsPage.module.css";
 
-const requestUrl = "https://api.escuelajs.co/api/v1/products";
+const requestUrl = "https://fakestoreapi.com/products";
 
 export const Products = () => {
   const [products, setProducts] = useState([]);
@@ -44,7 +44,7 @@ export const Products = () => {
                   <h3 className={styles.productTitle}>{product.title}</h3>
                 </Link>
                 <img
-                  src={product.images[0]}
+                  src={product.image}
                   className={styles.productImage}
                   alt={product.title}
                 />
