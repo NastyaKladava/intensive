@@ -1,0 +1,22 @@
+.productContainer {
+  max-width: 1620px;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.productTop {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productTitle {
+  margin-left: 30px;
+  margin-bottom: 25px;
+  text-align: center;
+  color: rgb(41, 128, 128);
+}
+
+
+

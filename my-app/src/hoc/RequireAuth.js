@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { LoginContext } from "./LoginProvider";
+import { AppContext } from "./AppProvider";
 
 const RequireAuth = ({ children }) => {
   const location = useLocation();
-  const { isLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn } = useContext(AppContext);
 
   if (!isLoggedIn) {
     return <Navigate to='/modal' state={{ from: location }} />;

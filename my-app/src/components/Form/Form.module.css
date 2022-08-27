@@ -2,3 +2,30 @@
   display: flex;
   justify-content: space-between;
 }
+
+.formfields {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputLabel {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 5px;
+  display: block;
+  color: var(--color-light);
+}
+
+.inputNotice {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px;
+  display: inline-block;
+  color: rgb(128, 6, 6);
+}
+
+
+
+

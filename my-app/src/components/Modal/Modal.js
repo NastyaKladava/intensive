@@ -1,9 +1,10 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import Form from "../Form/Form";
 import styles from "./Modal.module.css";
 
-export const Modal = () => {
+export const Modal = ({ closeModal }) => {
   const navigate = useNavigate();
   const goBack = () => navigate("/");
 
@@ -19,4 +20,12 @@ export const Modal = () => {
       </div>
     </div>
   );
+};
+
+export const Notification = ({ isShowModal, setIsShowModal }) => {
+  const closeModal = () => setIsShowModal(false);
+  const domNode = document.getElementById("modal");
+  if (domNode && isShowModal) {
+    return ReactDOM.createPortal(<Modal closeModal={closeModal} />, domNode);
+  }
 };

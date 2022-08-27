@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { LoginContext } from "../../hoc/LoginProvider";
+import { AppContext } from "../../hoc/AppProvider";
 import styles from "./Cart.module.css";
 
 const Cart = () => {
-  const { prodSum, prodQuantity } = useContext(LoginContext);
+  const { prodSum, prodQuantity } = useContext(AppContext);
 
   return (
     <div className={styles.productsCart}>

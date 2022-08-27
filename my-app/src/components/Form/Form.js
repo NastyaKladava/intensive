@@ -2,30 +2,21 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "..//Input/Input";
 import Button from "../Button/Button";
-import { LoginContext } from "../../hoc/LoginProvider";
+import { AppContext } from "../../hoc/AppProvider";
 import { formAuthFields } from "../../constants/constants";
 import { validate } from "../../utils/modalFormValidation";
 import styles from "./Form.module.css";
 
 const Form = () => {
   const [inputsValue, setInputsValue] = useState(formAuthFields);
-  const { isLoggedIn, setisLogin, setIsSubmitted } = useContext(LoginContext);
+  const { setisLogin, setIsSubmitted } = useContext(AppContext);
 
   const navigate = useNavigate();
   const goBack = () => navigate("/");
-  // const location = useLocation();
 
   const handleLogin = () => {
     setisLogin(true);
-
-    // location.state?.from?.pathName
-    //   ? navigate(location.state?.from?.pathName, { replace: true })
-    //   : navigate("/");
     navigate("/");
-  };
-
-  const handleLogOut = () => {
-    setisLogin(false);
   };
 
   const handleInputChanges = (e) => {
@@ -71,34 +62,38 @@ const Form = () => {
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formfields}>
         <Input
-          htmlFor='login'
-          labelText='Login'
           id='login'
           type='text'
           name='login'
           placeholder='Enter login'
-          notice={errors.login}
           value={fields.login}
           handleInputChanges={handleInputChanges}
+          labelEl={
+            <label className={styles.inputLabel} htmlFor='login'>
+              Login
+            </label>
+          }
+          noticeEl={<span className={styles.inputNotice}>{errors.login}</span>}
         />
         <Input
-          htmlFor='password'
-          labelText='Password'
           id='password'
           type='password'
           name='password'
           placeholder='Enter password'
-          notice={errors.password}
           value={fields.password}
           handleInputChanges={handleInputChanges}
+          labelEl={
+            <label className={styles.inputLabel} htmlFor='password'>
+              Password
+            </label>
+          }
+          noticeEl={
+            <span className={styles.inputNotice}>{errors.password}</span>
+          }
         />
       </div>
       <div className={styles.formBtns}>
-        {isLoggedIn ? (
-          <Button handler={handleLogOut}>Выйти</Button>
-        ) : (
-          <Button type='submit'>Войти</Button>
-        )}
+        <Button type='submit'>Войти</Button>
         <Button type='button' handler={goBack}>
           Отмена
         </Button>

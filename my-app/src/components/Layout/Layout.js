@@ -3,12 +3,16 @@ import { Outlet } from "react-router";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Button from "../Button/Button";
 import Cart from "../Cart/Cart";
-import { LoginContext } from "../../hoc/LoginProvider";
+import { AppContext } from "../../hoc/AppProvider";
 import styles from "./Layout.module.css";
 
 const Layout = () => {
   const location = useLocation();
-  const { isLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn, setisLogin } = useContext(AppContext);
+
+  const handleLogOut = () => setisLogin(false);;
+
+  const handleisShowModal = () =>;
 
   return (
     <>
@@ -28,6 +32,11 @@ const Layout = () => {
           <Link to='/modal' state={{ backgroundLocation: location }}>
             <Button type='button'>Авторизация</Button>
           </Link>
+          {isLoggedIn && (
+            <Button type='button' handler={handleLogOut}>
+              Выйти
+            </Button>
+          )}
         </div>
         <Outlet />
       </main>
