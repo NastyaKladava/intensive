@@ -3,20 +3,20 @@ import styles from "./Input.module.css";
 
 const Input = ({
   name,
-  labelText,
+  labelEl,
   id,
   type,
   placeholder,
   min,
+  max,
   notice,
+  noticeEl,
   value,
   handleInputChanges,
 }) => {
   return (
     <div className={styles.inputBox}>
-      <label className={styles.inputLabel} htmlFor={name}>
-        {labelText}
-      </label>
+      {labelEl}
       <input
         id={id}
         className={styles.inputValue}
@@ -24,11 +24,12 @@ const Input = ({
         name={name}
         placeholder={placeholder}
         min={min}
+        max={max}
         notice={notice}
         value={value}
         onChange={handleInputChanges}
       />
-      <span className={styles.inputNotice}>{notice}</span>
+      {noticeEl}
     </div>
   );
 };

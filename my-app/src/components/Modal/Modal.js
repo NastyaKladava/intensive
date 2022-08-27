@@ -1,9 +1,10 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import Form from "../Form/Form";
 import styles from "./Modal.module.css";
 
-export const Modal = () => {
+const Template = ({ closeModal }) => {
   const navigate = useNavigate();
   const goBack = () => navigate("/");
 
@@ -11,8 +12,8 @@ export const Modal = () => {
     <div className={styles.modalBox}>
       <div className={styles.modal}>
         <button
-          type='button'
-          onClick={goBack}
+          type="button"
+          onClick={closeModal}
           className={styles.modalBtn}
         ></button>
         <Form />
@@ -20,3 +21,13 @@ export const Modal = () => {
     </div>
   );
 };
+
+const Modal = ({ isShowModal, setIsShow }) => {
+  const closeModal = () => setIsShow(false);
+  const domNode = document.getElementById("modal");
+  if (domNode && isShowModal) {
+    return ReactDOM.createPortal(<Template closeModal={closeModal} />, domNode);
+  }
+};
+
+export default Modal;

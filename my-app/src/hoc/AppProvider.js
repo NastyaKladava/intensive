@@ -1,24 +1,28 @@
 import React, { createContext, useState } from "react";
 
-export const LoginContext = createContext(null);
+export const AppContext = createContext(null);
 
-export const LoginProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false);
   const [prodQuantity, setProdQuantity] = useState(0);
   const [prodSum, setProdSum] = useState(0);
 
   const setisLogin = (value) => setIsLoggedIn(value);
   const setQuantity = (value) => setProdQuantity(value);
+  const setIsShow = (value) => setIsShowModal(value);
   const setSum = (value) => setProdSum(value);
 
   return (
-    <LoginContext.Provider
+    <AppContext.Provider
       value={{
         isLoggedIn,
         setisLogin,
         isSubmitted,
         setIsSubmitted,
+        isShowModal,
+        setIsShow,
         prodQuantity,
         setQuantity,
         prodSum,
@@ -26,6 +30,6 @@ export const LoginProvider = ({ children }) => {
       }}
     >
       {children}
-    </LoginContext.Provider>
+    </AppContext.Provider>
   );
 };
