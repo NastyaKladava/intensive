@@ -13,21 +13,19 @@ const Layout = () => {
   return (
     <>
       <header className={styles.header}>
-        <div className='container'>
-          <NavLink to='/' className='headerLink'>
+        <div className="container">
+          <NavLink to="/" className="headerLink">
             Товары
           </NavLink>
-          <NavLink to='about' className='headerLink'>
+          <NavLink to="about" className="headerLink">
             О магазине
           </NavLink>
         </div>
       </header>
-      <main className='main'>
-        <div className='container container--flex'>
+      <main className="main">
+        <div className="container container--flex">
           {isLoggedIn && <Cart />}
-          <Link to='/modal' state={{ backgroundLocation: location }}>
-            <Button type='button'>Авторизация</Button>
-          </Link>
+          <Button type="button">Авторизация</Button>
         </div>
         <Outlet />
       </main>
