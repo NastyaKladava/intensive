@@ -9,7 +9,7 @@ import styles from "./Form.module.css";
 
 const Form = () => {
   const [inputsValue, setInputsValue] = useState(formAuthFields);
-  const { setisLogin, setIsSubmitted } = useContext(AppContext);
+  const { setisLogin, setIsSubmitted, setIsShow } = useContext(AppContext);
 
   const navigate = useNavigate();
   const goBack = () => navigate("/");
@@ -53,7 +53,12 @@ const Form = () => {
     if (Object.keys(validationErrors).length === 0) {
       setIsSubmitted(true);
       handleLogin();
+      setIsShow(false);
     }
+  };
+
+  const resetForm = () => {
+    setInputsValue(formAuthFields);
   };
 
   const { fields, errors } = inputsValue;
@@ -62,28 +67,28 @@ const Form = () => {
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formfields}>
         <Input
-          id='login'
-          type='text'
-          name='login'
-          placeholder='Enter login'
+          id="login"
+          type="text"
+          name="login"
+          placeholder="Enter login"
           value={fields.login}
           handleInputChanges={handleInputChanges}
           labelEl={
-            <label className={styles.inputLabel} htmlFor='login'>
+            <label className={styles.inputLabel} htmlFor="login">
               Login
             </label>
           }
           noticeEl={<span className={styles.inputNotice}>{errors.login}</span>}
         />
         <Input
-          id='password'
-          type='password'
-          name='password'
-          placeholder='Enter password'
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Enter password"
           value={fields.password}
           handleInputChanges={handleInputChanges}
           labelEl={
-            <label className={styles.inputLabel} htmlFor='password'>
+            <label className={styles.inputLabel} htmlFor="password">
               Password
             </label>
           }
@@ -93,8 +98,8 @@ const Form = () => {
         />
       </div>
       <div className={styles.formBtns}>
-        <Button type='submit'>Войти</Button>
-        <Button type='button' handler={goBack}>
+        <Button type="submit">Войти</Button>
+        <Button type="button" handler={resetForm}>
           Отмена
         </Button>
       </div>
