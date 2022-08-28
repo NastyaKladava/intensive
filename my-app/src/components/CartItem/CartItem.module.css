@@ -1,0 +1,28 @@
+.cartItem {
+    padding: 10px;
+    display: grid;
+    grid-template: auto / 1fr 2fr 1fr 2fr 1fr 2fr ;
+    justify-items: center;
+    border-bottom: 2px solid var(--color-light);
+}
+
+.cartItem span {
+    display: inline-block;
+    text-align: center;
+}
+
+.cartItemNum {
+    font-weight: 500;
+}
+
+.cartItemBtns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartItemQty {   
+     margin: 0 5px;
+     display: inline-block;
+     width: 20px;
+}

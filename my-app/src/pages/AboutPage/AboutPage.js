@@ -9,7 +9,7 @@ export const About = () => {
 
   return (
     <div className={styles.aboutContainer}>
-      <Button handler={goBack} className={styles.btn}>
+      <Button handler={goBack} className={styles.btn} classtype='primary'>
         Назад
       </Button>
       <p className={styles.aboutInfo}>

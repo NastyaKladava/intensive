@@ -1,28 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchProducts } from "../../requests/getProducts";
+import { useSelector } from "react-redux";
 import Button from "../Button/Button";
 import ProductItem from "../ProductItem/ProductItem";
 import styles from "./ProductPage.module.css";
 
 const Product = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState([]);
-
-  // const requestUrl = `https://fakestoreapi.com/products/${id}`;
-
+  const product = useSelector((toolkitStore) => toolkitStore.shop.products[id]);
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
-  useEffect(() => {
-    fetchProducts(`https://fakestoreapi.com/products/${id}`, setProduct);
-  }, [id]);
+  // useEffect(() => {
+  //   fetchProducts(`https://fakestoreapi.com/products/${id}`, setProduct);
+  // }, [id]);
 
   return (
     <section className='product'>
       <div className={styles.productContainer}>
         <div className={styles.productTop}>
-          <Button handler={goBack} className={styles.btn}>
+          <Button handler={goBack} className={styles.btn} classtype='primary'>
             Назад
           </Button>
           <h2 className={styles.productTitle}>

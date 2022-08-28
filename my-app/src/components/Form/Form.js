@@ -16,7 +16,7 @@ const Form = () => {
 
   const handleLogin = () => {
     setisLogin(true);
-    navigate("/");
+    goBack();
   };
 
   const handleInputChanges = (e) => {
@@ -67,28 +67,28 @@ const Form = () => {
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formfields}>
         <Input
-          id="login"
-          type="text"
-          name="login"
-          placeholder="Enter login"
+          id='login'
+          type='text'
+          name='login'
+          placeholder='Enter login'
           value={fields.login}
           handleInputChanges={handleInputChanges}
           labelEl={
-            <label className={styles.inputLabel} htmlFor="login">
+            <label className={styles.inputLabel} htmlFor='login'>
               Login
             </label>
           }
           noticeEl={<span className={styles.inputNotice}>{errors.login}</span>}
         />
         <Input
-          id="password"
-          type="password"
-          name="password"
-          placeholder="Enter password"
+          id='password'
+          type='password'
+          name='password'
+          placeholder='Enter password'
           value={fields.password}
           handleInputChanges={handleInputChanges}
           labelEl={
-            <label className={styles.inputLabel} htmlFor="password">
+            <label className={styles.inputLabel} htmlFor='password'>
               Password
             </label>
           }
@@ -98,8 +98,10 @@ const Form = () => {
         />
       </div>
       <div className={styles.formBtns}>
-        <Button type="submit">Войти</Button>
-        <Button type="button" handler={resetForm}>
+        <Button type='submit' classtype='primary'>
+          Войти
+        </Button>
+        <Button type='button' handler={resetForm} classtype='primary'>
           Отмена
         </Button>
       </div>

@@ -14,7 +14,7 @@
 
 .inputValue {
   padding: 5px;
-  max-width: 300px;
+  min-width: 250px;
   border-radius: var(--border-radius);
   outline: none;
   border: none;

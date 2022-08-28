@@ -1,21 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
+import Button from "../Button/Button";
 import Form from "../Form/Form";
 import styles from "./Modal.module.css";
 
 const Template = ({ closeModal }) => {
-  const navigate = useNavigate();
-  const goBack = () => navigate("/");
+  // const navigate = useNavigate();
+  // const goBack = () => navigate("/");
 
   return (
     <div className={styles.modalBox}>
       <div className={styles.modal}>
-        <button
-          type="button"
-          onClick={closeModal}
-          className={styles.modalBtn}
-        ></button>
+        <Button type='button' handler={closeModal} classtype='close'></Button>
         <Form />
       </div>
     </div>

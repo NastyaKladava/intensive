@@ -1,20 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Button from "../Button/Button";
-import Input from "../Input/Input";
 import { AppContext } from "../../hoc/AppProvider";
+import { addToCart } from "../../toolkitStore/reducers/cartSlice";
 import styles from "./ProductItem.module.css";
 
-const ProductItem = ({ linkSrc, title, imageSrc, description, price }) => {
-  const [prodInputQuantity, setProdInputQuantity] = useState(0);
-  const { isLoggedIn, setSum, setQuantity } = useContext(AppContext);
+const ProductItem = ({ id, linkSrc, title, imageSrc, description, price }) => {
+  const { isLoggedIn } = useContext(AppContext);
 
-  const addToCart = (e) => {
-    let price = Number(parseFloat(e.target.previousSibling.innerText));
-    if (prodInputQuantity > 0) {
-      setQuantity((prevState) => +prevState + +prodInputQuantity);
-    }
-    setSum((prevState) => prevState + price * prodInputQuantity);
+  const dispatch = useDispatch();
+
+  const addProductToCart = (e) => {
+    dispatch(addToCart({ id, title, price }));
   };
 
   return (
@@ -31,20 +29,9 @@ const ProductItem = ({ linkSrc, title, imageSrc, description, price }) => {
             Чтобы добавить товар в корзину залогиньтесь!
           </span>
         ) : (
-          <>
-            <Button type='button' handler={addToCart}>
-              Добавить в корзину
-            </Button>
-            <Input
-              name='prodCount'
-              id='prodCount'
-              type='number'
-              min='0'
-              max='10'
-              value={prodInputQuantity}
-              handleInputChanges={(e) => setProdInputQuantity(e.target.value)}
-            />
-          </>
+          <Button type='button' handler={addProductToCart} classtype='primary'>
+            Добавить в корзину
+          </Button>
         )}
       </div>
     </div>

@@ -19,14 +19,4 @@
   background-color: var(--color-bg-main);
 }
 
-.modalBtn {
-  position: relative;
-  top: -15px;
-  right: 10px;
-  width: 18px;
-  height: 18px;
-  align-self: flex-end;
-  background: center/cover no-repeat url("../../images/icons/close.svg")
-    var(--color-bg-main);
-  border: none;
-}
+

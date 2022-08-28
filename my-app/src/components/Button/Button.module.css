@@ -1,12 +1,57 @@
 .btn {
-
   font-size: 12px;
   margin-right: 10px;
   padding: 8px;
   text-transform: uppercase;
-  width: 120px;
   border-radius: var(--border-radius);
   border: none;
+
+}
+
+.primary {
+  composes: btn;
+  width: 120px;
   color: var(--color-light);
   background-color: rgb(63, 163, 63);
 }
+
+.load {
+  composes: primary;
+  align-self: center;
+}
+
+.min {
+  composes: btn;
+  margin-right: 0;
+  width: 30px;
+  height: 30px;
+  background: center/cover  no-repeat url("../../images//icons/minus.svg") var(--color-light);
+}
+
+.plus {
+  composes: btn;
+  margin-right: 0;
+  width: 30px;
+  height: 30px;
+  background: center/cover  no-repeat url("../../images//icons/plus.svg") var(--color-light);
+}
+
+.cart {
+  composes: btn;
+  width: 40px;
+  height: 40px;
+  background: center/cover no-repeat url("../../images//icons/cart.svg") ;
+}
+
+.close {
+  composes: btn;
+  position: relative;
+  top: -15px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  align-self: flex-end;
+  background: center/cover no-repeat url("../../images/icons/close.svg")
+    var(--color-bg-main);
+}
+
