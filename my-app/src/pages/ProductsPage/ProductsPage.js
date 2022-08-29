@@ -2,25 +2,28 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductItem from "../../components/ProductItem/ProductItem";
 import Button from "../../components/Button/Button";
-import { fetchProducts } from "../../toolkitStore/reducers/shopSlice";
-import { productsSelector } from "../../toolkitStore/selectors/products";
+import {
+  changeLimit,
+  fetchProducts,
+} from "../../toolkitStore/reducers/shopSlice";
+import { limitSelector, productsSelector } from "../../toolkitStore/selectors";
 import styles from "./ProductsPage.module.css";
 
 export const Products = () => {
+  const dataSize = 20;
   const products = useSelector(productsSelector);
+  const limit = useSelector(limitSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+    dispatch(fetchProducts(limit));
+  }, [limit]);
 
-  const loadProducts = () => {
-    dispatch(fetchProducts());
-  };
+  const loadMoreProducts = () => dispatch(changeLimit());
 
   return (
     <>
-      <section className='products'>
+      <section className="products">
         <div className={styles.productsContainer}>
           <h2 className={styles.productsTitle}>Перечень наших товаров</h2>
           <div className={styles.productsBox}>
@@ -35,9 +38,11 @@ export const Products = () => {
               />
             ))}
           </div>
-          <Button type='button' classtype='load' handler={loadProducts}>
-            Ещё товары!
-          </Button>
+          {limit <= dataSize && (
+            <Button type="button" classtype="load" handler={loadMoreProducts}>
+              Ещё товары!
+            </Button>
+          )}
         </div>
       </section>
     </>

@@ -2,9 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async function (_, { rejectWithValue }) {
+  async function (limit, { rejectWithValue }) {
     try {
-      const response = await fetch("https://fakestoreapi.com/products");
+      const response = await fetch(
+        "https://fakestoreapi.com/products?limit=" + limit
+      );
       if (!response.ok) {
         throw new Error("Server Error");
       }
@@ -22,10 +24,15 @@ const productsSlice = createSlice({
     products: [],
     loading: false,
     error: null,
+    limit: 4,
     currentItem: null,
   },
 
-  reducers: {},
+  reducers: {
+    changeLimit: (state) => {
+      state.limit = state.limit + 4;
+    },
+  },
 
   extraReducers: {
     [fetchProducts.pending]: (state) => {
@@ -43,3 +50,4 @@ const productsSlice = createSlice({
 });
 
 export default productsSlice.reducer;
+export const { changeLimit } = productsSlice.actions;

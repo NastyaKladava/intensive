@@ -1,17 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button/Button";
-import { AppContext } from "../../hoc/AppProvider";
 import { addToCart } from "../../toolkitStore/reducers/cartSlice";
 import styles from "./ProductItem.module.css";
+import { isLogInSelector } from "../../toolkitStore/selectors";
 
 const ProductItem = ({ id, linkSrc, title, imageSrc, description, price }) => {
-  const { isLoggedIn } = useContext(AppContext);
-
+  const isLogIn = useSelector(isLogInSelector);
   const dispatch = useDispatch();
 
-  const addProductToCart = (e) => {
+  const addProductToCart = () => {
     dispatch(addToCart({ id, title, price }));
   };
 
@@ -24,12 +23,12 @@ const ProductItem = ({ id, linkSrc, title, imageSrc, description, price }) => {
       <p className={styles.productDescr}>{description}</p>
       <div className={styles.productBuy}>
         <span className={styles.productPrice}>{price}$</span>
-        {!isLoggedIn ? (
+        {!isLogIn ? (
           <span className={styles.productNotice}>
             Чтобы добавить товар в корзину залогиньтесь!
           </span>
         ) : (
-          <Button type='button' handler={addProductToCart} classtype='primary'>
+          <Button type="button" handler={addProductToCart} classtype="primary">
             Добавить в корзину
           </Button>
         )}

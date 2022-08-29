@@ -2,21 +2,21 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../Button/Button";
 import CartItem from "../CartItem/CartItem";
-import { cart, productsFromCart } from "../../toolkitStore/selectors/products";
+import { cartSelector, productsFromCart } from "../../toolkitStore/selectors";
 import { clearCart, getTotals } from "../../toolkitStore/reducers/cartSlice";
 import styles from "./Cart.module.css";
 
 const Cart = () => {
-  const products = useSelector(productsFromCart);
-  const { totalQty, totalSum } = useSelector(cart);
   const dispatch = useDispatch();
+  const products = useSelector(productsFromCart);
+  const { totalQty, totalSum } = useSelector(cartSelector);
 
   useEffect(() => {
     dispatch(getTotals());
   }, [products, dispatch]);
 
   return (
-    <section className='cart'>
+    <section className="cart">
       <div className={styles.cartContainer}>
         <h2 className={styles.productsCartTitle}>
           Перечень добавленных товаров
@@ -53,13 +53,13 @@ const Cart = () => {
               </p>
               <div className={styles.productsCartBtns}>
                 <Button
-                  type='button'
+                  type="button"
                   handler={() => dispatch(clearCart())}
-                  classtype='primary'
+                  classtype="primary"
                 >
                   Очистить
                 </Button>
-                <Button disabled='disabled' classtype='primary'>
+                <Button disabled="disabled" classtype="primary">
                   Оплатить
                 </Button>
               </div>

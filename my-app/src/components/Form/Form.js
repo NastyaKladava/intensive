@@ -1,21 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Input from "..//Input/Input";
 import Button from "../Button/Button";
-import { AppContext } from "../../hoc/AppProvider";
 import { formAuthFields } from "../../constants/constants";
 import { validate } from "../../utils/modalFormValidation";
 import styles from "./Form.module.css";
+import {
+  logIn,
+  setUserData,
+  showModal,
+  submit,
+} from "../../toolkitStore/actions";
 
 const Form = () => {
   const [inputsValue, setInputsValue] = useState(formAuthFields);
-  const { setisLogin, setIsSubmitted, setIsShow } = useContext(AppContext);
-
+  const { fields, errors } = inputsValue;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const goBack = () => navigate("/");
 
   const handleLogin = () => {
-    setisLogin(true);
+    dispatch(logIn(true));
     goBack();
   };
 
@@ -51,9 +58,15 @@ const Form = () => {
     }
 
     if (Object.keys(validationErrors).length === 0) {
-      setIsSubmitted(true);
+      dispatch(submit(true));
       handleLogin();
-      setIsShow(false);
+      dispatch(showModal(false));
+      dispatch(
+        setUserData({
+          login: fields.login,
+          password: fields.password,
+        })
+      );
     }
   };
 
@@ -61,34 +74,32 @@ const Form = () => {
     setInputsValue(formAuthFields);
   };
 
-  const { fields, errors } = inputsValue;
-
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formfields}>
         <Input
-          id='login'
-          type='text'
-          name='login'
-          placeholder='Enter login'
+          id="login"
+          type="text"
+          name="login"
+          placeholder="Enter login"
           value={fields.login}
           handleInputChanges={handleInputChanges}
           labelEl={
-            <label className={styles.inputLabel} htmlFor='login'>
+            <label className={styles.inputLabel} htmlFor="login">
               Login
             </label>
           }
           noticeEl={<span className={styles.inputNotice}>{errors.login}</span>}
         />
         <Input
-          id='password'
-          type='password'
-          name='password'
-          placeholder='Enter password'
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Enter password"
           value={fields.password}
           handleInputChanges={handleInputChanges}
           labelEl={
-            <label className={styles.inputLabel} htmlFor='password'>
+            <label className={styles.inputLabel} htmlFor="password">
               Password
             </label>
           }
@@ -98,10 +109,10 @@ const Form = () => {
         />
       </div>
       <div className={styles.formBtns}>
-        <Button type='submit' classtype='primary'>
+        <Button type="submit" classtype="primary">
           Войти
         </Button>
-        <Button type='button' handler={resetForm} classtype='primary'>
+        <Button type="button" handler={resetForm} classtype="primary">
           Отмена
         </Button>
       </div>

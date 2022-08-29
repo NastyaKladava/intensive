@@ -11,15 +11,11 @@ const Product = () => {
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
-  // useEffect(() => {
-  //   fetchProducts(`https://fakestoreapi.com/products/${id}`, setProduct);
-  // }, [id]);
-
   return (
-    <section className='product'>
+    <section className="product">
       <div className={styles.productContainer}>
         <div className={styles.productTop}>
-          <Button handler={goBack} className={styles.btn} classtype='primary'>
+          <Button handler={goBack} className={styles.btn} classtype="primary">
             Назад
           </Button>
           <h2 className={styles.productTitle}>
@@ -28,7 +24,7 @@ const Product = () => {
         </div>
         <ProductItem
           key={product.id}
-          linkSrc=''
+          linkSrc=""
           imageSrc={product.image}
           title={product.title}
           description={product.description}
