@@ -37,6 +37,11 @@ a {
   align-items: center;
 }
 
+.container--flex {
+  display: flex;
+  justify-content: center;
+}
+
 .headerLink {
   text-decoration: none;
   outline: none;

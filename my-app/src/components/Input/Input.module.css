@@ -13,16 +13,27 @@
 }
 
 .inputValue {
-  padding: 5px;
-  min-width: 250px;
   border-radius: var(--border-radius);
   outline: none;
   border: none;
   background-color: var(--color-light);
 }
 
+.primary {
+  composes: inputValue;
+  padding: 5px;
+  min-width: 250px;
+}
+
+.range {
+  composes: inputValue;
+  margin-left: 3px;
+  padding: 3px;
+  width: 45px;
+  height: 42px;
+}
+
 .inputValue::placeholder {
   font-size: 10px;
   color: #2e2c2c;
 }
-

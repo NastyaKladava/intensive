@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Input from "..//Input/Input";
 import Button from "../Button/Button";
 import { formAuthFields } from "../../constants/constants";
-import { validate } from "../../utils/modalFormValidation";
+import { validate } from "../../utils/validation";
 import styles from "./Form.module.css";
 import {
   logIn,
@@ -16,14 +16,15 @@ import {
 const Form = () => {
   const [inputsValue, setInputsValue] = useState(formAuthFields);
   const { fields, errors } = inputsValue;
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const goBack = () => navigate("/");
-
   const handleLogin = () => {
     dispatch(logIn(true));
-    goBack();
+    if (location.state?.from?.pathname) {
+      navigate(location?.state?.from?.pathname, { replace: true });
+    } else navigate("/");
   };
 
   const handleInputChanges = (e) => {
@@ -79,6 +80,7 @@ const Form = () => {
       <div className={styles.formfields}>
         <Input
           id="login"
+          classtype="primary"
           type="text"
           name="login"
           placeholder="Enter login"
@@ -93,6 +95,7 @@ const Form = () => {
         />
         <Input
           id="password"
+          classtype="primary"
           type="password"
           name="password"
           placeholder="Enter password"

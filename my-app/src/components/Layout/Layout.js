@@ -6,10 +6,17 @@ import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
 import styles from "./Layout.module.css";
 import { logIn, showModal } from "../../toolkitStore/actions";
-import { isLogInSelector } from "../../toolkitStore/selectors";
+import {
+  cartSelector,
+  isLogInSelector,
+  isLoadingSelector,
+} from "../../toolkitStore/selectors";
+import Loading from "../Loading/Loading";
 
 const Layout = () => {
+  const isLoading = useSelector(isLoadingSelector);
   const isLogIn = useSelector(isLogInSelector);
+  const { totalQty, totalSum } = useSelector(cartSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,18 +34,27 @@ const Layout = () => {
           </NavLink>
         </div>
       </header>
-      <main className="main">
+      <main className={styles.main}>
         <div className="container container--flex">
           {isLogIn && (
-            <Button type="button" handler={openCart} classtype="cart"></Button>
+            <div className={styles.containerCart}>
+              <p className={styles.containerResult}>
+                В корзине <span>{totalQty} </span>товара(ов) на сумму {""}
+                <span>{totalSum}</span>$
+              </p>
+              <Button type="button" handler={openCart} classtype="cart" />
+            </div>
           )}
-          <Button
-            classtype="primary"
-            type="button"
-            handler={() => dispatch(showModal(true))}
-          >
-            Авторизация
-          </Button>
+          {!isLogIn && (
+            <Button
+              classtype="primary"
+              type="button"
+              handler={() => dispatch(showModal(true))}
+            >
+              Авторизация
+            </Button>
+          )}
+
           {isLogIn && (
             <Button
               type="button"
@@ -49,6 +65,7 @@ const Layout = () => {
             </Button>
           )}
         </div>
+        {isLoading && <Loading />}
         <Outlet />
         <Modal />
       </main>

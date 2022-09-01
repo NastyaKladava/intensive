@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import Button from "../Button/Button";
-import { removeItem } from "../../toolkitStore/reducers/cartSlice";
 import {
+  removeItem,
   decrementQty,
   incrementQty,
 } from "../../toolkitStore/reducers/cartSlice";
@@ -11,6 +11,10 @@ import styles from "./CartItem.module.css";
 const CartItem = ({ id, title, price, qty, sum }) => {
   const dispatch = useDispatch();
 
+  if (qty === 0) {
+    dispatch(removeItem(id));
+  }
+
   return (
     <div className={styles.cartItem}>
       <span className={styles.cartItemNum}>{id}</span>
@@ -18,22 +22,22 @@ const CartItem = ({ id, title, price, qty, sum }) => {
       <span className={styles.cartItemPrice}>{price}</span>
       <div className={styles.cartItemBtns}>
         <Button
-          type='button'
+          type="button"
           handler={() => dispatch(decrementQty(id))}
-          classtype='min'
-        ></Button>
+          classtype="min"
+        />
         <span className={styles.cartItemQty}>{qty}</span>
         <Button
-          type='button'
+          type="button"
           handler={() => dispatch(incrementQty(id))}
-          classtype='plus'
-        ></Button>
+          classtype="plus"
+        />
       </div>
       <span className={styles.cartItemSum}>{sum}</span>
       <Button
-        type='button'
+        type="button"
         handler={() => dispatch(removeItem(id))}
-        classtype='primary'
+        classtype="primary"
       >
         Удалить
       </Button>

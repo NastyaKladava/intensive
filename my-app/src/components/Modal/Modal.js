@@ -11,7 +11,7 @@ const Template = ({ closeModal }) => {
   return (
     <div className={styles.modalBox}>
       <div className={styles.modal}>
-        <Button type="button" handler={closeModal} classtype="close"></Button>
+        <Button type="button" handler={closeModal} classtype="close" />
         <Form />
       </div>
     </div>

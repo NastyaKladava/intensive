@@ -5,6 +5,7 @@ const Input = ({
   name,
   labelEl,
   id,
+  classtype,
   type,
   placeholder,
   min,
@@ -19,7 +20,8 @@ const Input = ({
       {labelEl}
       <input
         id={id}
-        className={styles.inputValue}
+        classtype={classtype}
+        className={styles[classtype]}
         type={type}
         name={name}
         placeholder={placeholder}

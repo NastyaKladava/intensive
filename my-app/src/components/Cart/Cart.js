@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../Button/Button";
 import CartItem from "../CartItem/CartItem";
-import { cartSelector, productsFromCart } from "../../toolkitStore/selectors";
+import { productsFromCart } from "../../toolkitStore/selectors";
 import { clearCart, getTotals } from "../../toolkitStore/reducers/cartSlice";
 import styles from "./Cart.module.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector(productsFromCart);
-  const { totalQty, totalSum } = useSelector(cartSelector);
 
   useEffect(() => {
     dispatch(getTotals());
@@ -47,10 +46,6 @@ const Cart = () => {
               ))}
             </div>
             <div className={styles.productsCartBottom}>
-              <p className={styles.productsCartResult}>
-                В корзину добавлено <span>{totalQty}</span> товаров на сумму{" "}
-                <span>{totalSum}$</span>
-              </p>
               <div className={styles.productsCartBtns}>
                 <Button
                   type="button"

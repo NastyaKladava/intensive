@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Button from "../Button/Button";
 import ProductItem from "../ProductItem/ProductItem";
 import styles from "./ProductPage.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurProduct } from "../../toolkitStore/thunks";
+import { currentProdSelector } from "../../toolkitStore/selectors";
 
 const Product = () => {
   const { id } = useParams();
-  const product = useSelector((toolkitStore) => toolkitStore.shop.products[id]);
+  const endUrl = `products/${id}`;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const product = useSelector(currentProdSelector);
   const goBack = () => navigate(-1);
+
+  useEffect(() => {
+    dispatch(fetchCurProduct(endUrl));
+  }, [endUrl, dispatch]);
 
   return (
     <section className="product">
@@ -24,6 +32,7 @@ const Product = () => {
         </div>
         <ProductItem
           key={product.id}
+          isShowRange="true"
           linkSrc=""
           imageSrc={product.image}
           title={product.title}

@@ -9,15 +9,17 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
+      const qty = Number(action.payload.inputQty) || 1;
       const itemInCart = state.cart.find(
         (item) => item.id === action.payload.id
       );
+
       if (itemInCart) {
-        itemInCart.quantity++;
+        itemInCart.quantity = itemInCart.quantity + qty;
       } else {
         state.cart.push({
           ...action.payload,
-          quantity: 1,
+          quantity: qty,
         });
       }
     },

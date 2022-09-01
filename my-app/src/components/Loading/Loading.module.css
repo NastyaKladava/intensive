@@ -1,0 +1,8 @@
+.loadingContainer {
+  max-width: 1620px;
+  padding: 30px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

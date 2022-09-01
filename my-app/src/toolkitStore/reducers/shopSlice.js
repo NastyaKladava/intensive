@@ -1,31 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-export const fetchProducts = createAsyncThunk(
-  "products/fetchProducts",
-  async function (limit, { rejectWithValue }) {
-    try {
-      const response = await fetch(
-        "https://fakestoreapi.com/products?limit=" + limit
-      );
-      if (!response.ok) {
-        throw new Error("Server Error");
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchCurProduct, fetchProducts } from "../thunks";
 
 const productsSlice = createSlice({
   name: "products",
   initialState: {
     products: [],
+    curProduct: [],
     loading: false,
     error: null,
     limit: 4,
-    currentItem: null,
   },
 
   reducers: {
@@ -45,6 +28,11 @@ const productsSlice = createSlice({
     [fetchProducts.rejected]: (state, payload) => {
       state.loading = false;
       state.error = payload;
+    },
+
+    [fetchCurProduct.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.curProduct = action.payload;
     },
   },
 });
