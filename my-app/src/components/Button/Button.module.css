@@ -1,8 +1,90 @@
-.button {
-    padding: 5px;
-    border-radius: 10px;
+.btn {
+    font-size: 12px;
+    padding: 10px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: var(--border-radius);
     border: none;
-    min-width: 100px;
-    color: rgb(87, 230, 129);
-    background-color: rgb(8, 8, 97);
+}
+
+.filter {
+    composes: btn;
+    color: var(--color-light);
+    background-color: var(--color-dark);
+}
+
+.filter:not(:last-child) {
+    margin-right: 8px;
+}
+
+.menu {
+    composes: btn;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    align-self: flex-end;
+    background: center/cover  no-repeat url("../../images//icons/menu.svg");
+}
+
+.fav {
+    composes: btn;
+    padding: 0;
+    margin-right: 5px;
+    width: 10px;
+    height: 10px;
+    background: center/cover  no-repeat url("../../images//icons/star.svg");
+}
+
+/* .menuBtn {
+    composes: btn;
+    padding: 0;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    align-self: flex-end;
+}
+
+.select {
+    composes: menuBtn;
+    background: center/cover  no-repeat url("../../images//icons/selected.svg");
+}
+
+.done {
+    composes: menuBtn;
+    background: center/cover  no-repeat url("../../images//icons/done.svg");
+}
+
+.edit {
+    composes: menuBtn;
+    background: center/cover  no-repeat url("../../images//icons/edit.svg");
+}
+
+.delete {
+    composes: menuBtn;
+    background: center/cover  no-repeat url("../../images//icons/delete.svg");
+} */
+
+.menuBtn {
+    composes: btn;
+    font-size: 8px;
+    padding: 2px;
+    width: 75px;
+    text-transform: lowercase;
+    background-color: var(--color-light);
+}
+
+.menuBtn:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+.close {
+    composes: btn;
+    position: relative;
+    top: -15px;
+    right: 10px;
+    width: 18px;
+    height: 18px;
+    align-self: flex-end;
+    background: center/cover no-repeat url("../../images/icons/close.svg");
 }

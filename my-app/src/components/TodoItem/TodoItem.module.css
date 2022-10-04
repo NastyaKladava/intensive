@@ -1,0 +1,17 @@
+.todoItem:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.todoItemBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todoItem {
+    padding: 10px;
+    width: 70%;
+    border-radius: var(--border-radius);
+    color: var(--color-dark);
+    background-color: var(--color-lavander);
+  }
